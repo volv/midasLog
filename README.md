@@ -2,12 +2,14 @@ midasLog
 
 Going to eventually persist logs from Kongregate Chat rooms.
 
-npm install
+npm install  
+
 npm start
 
 Open up localhost:8080
 
-To get data go to kongregate.com. Find and join an active chat room for one of their games
+To get data go to kongregate.com. Find and join an active chat room for one of their games  
+
 (I'm using http://www.kongregate.com/games/HolydayStudios/midas-gold-plus)
 
 Open the console:
