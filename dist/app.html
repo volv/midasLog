@@ -13,9 +13,10 @@
   <h1>Midas Log</h1>
 
   <div id="app" class="container-fluid">
-    <div id="timer">{{ timer.toFixed(2) }}</div>
+    <div id="timer">{{ timer.toFixed(1) }}</div>
     <input @keyup="scrollDown" v-model="show" placeholder="Show Last:">
     <input @keyup="scrollDown" v-model="filterText" placeholder="Filter By">
+    {{matches}} Found
     <div class="row align-items-start" style="height: 100%">
       <div class="col-3" style="height: 100%; overflow-y: hidden">
         <table id="users">
