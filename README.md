@@ -3,6 +3,7 @@ midasLog
 Going to eventually persist logs from Kongregate Chat rooms.
 
 npm install -g nodemon 
+
 npm install  
 npm start 
 
