@@ -1,0 +1,44 @@
+html, body {
+  height: 100%;
+  overflow: hidden;
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+#messages tr:nth-child(2n) {
+  background: lightblue;
+}
+td {
+  padding: 5px 10px;
+}
+
+#timer {
+  position: fixed;
+  right: 20px;
+}
+
+#app {
+  height: 80%;
+  padding: 10px;
+}
+
+#users {
+  height: 100%;
+  display: inline-block;
+  overflow-y: scroll;
+}
+
+#messages {
+  height: 80%;
+  overflow-y: scroll;
+}
+
+.timeStamp {
+  font-size: x-small;
+}
+
+.userName {
+  font-weight: 700;
+}

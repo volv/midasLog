@@ -1,0 +1,86 @@
+function sendMidasData() {
+  var midasData = {};
+
+  var midasUserRows = Array.from(document.querySelectorAll(".user_row"));
+  var midasUserList = midasUserRows.filter(f=>f.querySelector(".username")).map(m=>m.querySelector(".username"));
+  var midasUserNames = midasUserList.map(m => m.getAttribute("username"));
+
+  midasData.userNames = midasUserNames;
+
+  var messages = [];
+  var midasMessages = Array.from(document.querySelectorAll(".chat-message"));
+  midasMessages.forEach(each => {
+    var message = {}
+    if (!each.querySelector(".timestamp")) return;
+    message.timeStamp = each.querySelector(".timestamp").innerText;
+    message.userName = each.querySelector(".username").getAttribute("username"); 
+    message.message = each.querySelector(".message").innerText;
+    messages.push(message);
+  });
+
+  midasData.messages = messages;
+
+  fetch("http://localhost:8080/volvpost", {
+    method: "post",
+    mode: "cors",
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(midasData)
+    })
+
+  .then((data) => { console.log(`Sent MidasData @ ${new Date()}`); console.dir(midasData); } );
+
+}
+
+var sendingMidas = setInterval(sendMidasData, 10000);
+
+clearInterval(sendingMidas);
+
+
+
+
+
+<script type="text/javascript">
+//console.clear();
+  // const app = document.getElementById("app");
+  // app.innerHTML = "<br>Querying volv route.... ('real' server delay)<br>";
+  // const test = fetch("/volv")
+  // .then(response=>response.json())
+  // .then(response => app.innerHTML += JSON.stringify(response) );
+
+// document.getElementById("doPost").addEventListener("click", function() {
+//   var payload = {
+//     a: 10,
+//     b: 20
+//   };
+
+//   fetch("volvpost", {
+//     method: "post",
+//     headers: {
+//       'Accept': 'application/json',
+//       'Content-Type': 'application/json'
+//     },
+//     body: JSON.stringify(payload)
+//     })
+//     .then(function(res){ return res.json(); })
+//     .then(function(data){ alert( JSON.stringify( data ) ) })
+
+// })
+</script>
+
+
+
+
+<!--   fetch("http://localhost:8080/volvpost", {
+    method: "post",
+    mode: "cors",
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(meh2)
+    })
+    .then(function(res){ return res.json(); })
+    .then(function(data){ alert( JSON.stringify( data ) ) }) -->
