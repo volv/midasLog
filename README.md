@@ -2,12 +2,14 @@ midasLog
 
 Going to eventually persist logs from Kongregate Chat rooms.
 
-npm install
-npm start
+npm install -g nodemon 
+npm install  
+npm start 
 
 Open up localhost:8080
 
-To get data go to kongregate.com. Find and join an active chat room for one of their games
+To get data go to kongregate.com. Find and join an active chat room for one of their games  
+
 (I'm using http://www.kongregate.com/games/HolydayStudios/midas-gold-plus)
 
 Open the console:
@@ -48,7 +50,8 @@ Open the console:
 
 }
 
-var sendingMidas = setInterval(sendMidasData, 10000);```
+var sendingMidas = setInterval(sendMidasData, 10000);
+```
 
 Paste that to start sending user and chat data to the server every 10 seconds. Leave game window open
 
