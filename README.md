@@ -48,7 +48,8 @@ Open the console:
 
 }
 
-var sendingMidas = setInterval(sendMidasData, 10000);```
+var sendingMidas = setInterval(sendMidasData, 10000);
+```
 
 Paste that to start sending user and chat data to the server every 10 seconds. Leave game window open
 
