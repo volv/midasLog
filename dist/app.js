@@ -12,13 +12,15 @@ var app = new Vue({
     lastX: function() {
       if (this.filterText && this.filterText.length > 0) {
         let filtered = this.messages.filter(function(f) {
-          let fText = app.filterText.toLowerCase();
+          let fText = this.filterText.toLowerCase();
           return f.userName.toLowerCase().includes(fText) || f.message.toLowerCase().includes(fText);
-        })
+        });
+
         let sliceStart = (filtered.length-this.show > 0) ? filtered.length-this.show : 0;
         this.matches = filtered.length;
         return filtered.slice(sliceStart);
       }
+
       this.matches = this.messages.length;
       let sliceStart = (this.messages.length-this.show > 0) ? this.messages.length-this.show : 0;
       return this.messages.slice(sliceStart);
@@ -29,7 +31,7 @@ var app = new Vue({
   },
   methods: {
     scrollDown: function() {
-      var container = document.getElementById("messageContainer");
+      let container = document.getElementById("messageContainer");
       container.scrollTop = container.scrollHeight;
     }
   }
@@ -37,12 +39,26 @@ var app = new Vue({
 
 let init = (() => {
   var socket = io("localhost:3000");
-  socket.on('update', function(msg){
-    let data = JSON.parse(msg);
-    app.messages = data.messages;
-    app.userNames = data.userNames;
-    app.timer = 10;
-  });
+
+  socket.on('startup', function(data) {
+    console.log("receiving startup", data)
+    app.messages = data;
+    setUpdates();
+  })
+
+  function setUpdates() {
+    socket.on('update', function(msg){
+      let data = JSON.parse(msg);
+
+      app.messages = app.messages.concat(data.messages);
+      Vue.nextTick(app.scrollDown);
+      app.userNames = data.userNames;
+      if (data.messages.length > 0) {
+        socket.emit("updateDB", data.messages)
+      }
+      app.timer = 10;
+    });
+  }
 
   setInterval(() => {
     app.timer -= 0.1

@@ -4,7 +4,7 @@
   "description": "Receive users and chat logs from Kong Chat Midas Gold Plus Room 1",
   "main": "nodemon server.js",
   "scripts": {
-    "start": "nodemon server.js",  
+    "start": "nodemon server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
@@ -23,6 +23,8 @@
     "body-parser": "^1.17.2",
     "cors": "^2.8.4",
     "express": "^4.15.4",
+    "mongod": "^2.0.0",
+    "mongodb": "^2.2.31",
     "socket.io": "^2.0.3"
   }
 }

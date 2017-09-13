@@ -1,3 +1,7 @@
+var curMessageTotalSize = 0;
+var prevMessageTotalSize = 0;
+var messageActualSentSize = 0;
+
 function sendMidasData() {
   var midasData = {};
 
@@ -18,7 +22,18 @@ function sendMidasData() {
     messages.push(message);
   });
 
+  prevMessageTotalSize = curMessageTotalSize;
+  curMessageTotalSize = messages.length;
+  var diff = curMessageTotalSize - prevMessageTotalSize;
+
+  if (diff < 0) {
+    messages = messages.slice(0);
+  } else {
+    messages = messages.slice(messages.length-diff);
+  }
+
   midasData.messages = messages;
+  messageActualSentSize = messages.length;
 
   fetch("http://localhost:8080/volvpost", {
     method: "post",
@@ -29,8 +44,7 @@ function sendMidasData() {
     },
     body: JSON.stringify(midasData)
     })
-
-  .then((data) => { console.log(`Sent MidasData @ ${new Date()}`); console.dir(midasData); } );
+  .then((data) => { console.log(`Sent MidasData, Length ${messageActualSentSize} @ ${new Date()}`); console.dir(midasData); } );
 
 }
 

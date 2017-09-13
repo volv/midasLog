@@ -2,6 +2,14 @@ midasLog
 
 Going to eventually persist logs from Kongregate Chat rooms.
 
+Install MongoDB either locally (I have for now) or Host on cloud.
+https://docs.mongodb.com/manual/installation/
+
+Run mongodb. (The server. just starting it up with defaults should be ok. Make sure you have set up DB directories as shown in installation notes.)
+
+App assumes localhost:21017
+Otherwise change in server.js to cloud hosted solution
+
 npm install -g nodemon 
 
 npm install  
@@ -15,7 +23,8 @@ To get data go to kongregate.com. Find and join an active chat room for one of t
 
 Open the console:
 
-```function sendMidasData() {
+```
+function sendMidasData() {
   var midasData = {};
 
   var midasUserRows = Array.from(document.querySelectorAll(".user_row"));
