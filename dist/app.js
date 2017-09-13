@@ -51,10 +51,10 @@ let init = (() => {
       let data = JSON.parse(msg);
 
       app.messages = app.messages.concat(data.messages);
-      Vue.nextTick(app.scrollDown);
       app.userNames = data.userNames;
       if (data.messages.length > 0) {
         socket.emit("updateDB", data.messages)
+        Vue.nextTick(app.scrollDown);
       }
       app.timer = 10;
     });
@@ -64,5 +64,5 @@ let init = (() => {
     app.timer -= 0.1
   }, 100);
 
-  app.scrollDown();
+  Vue.nextTick(app.scrollDown);
 })();
