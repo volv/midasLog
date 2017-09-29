@@ -1,6 +1,7 @@
 {
   "name": "midasLog",
   "version": "1.0.0",
+  "repository": "https://github.com/volv/midasLog",
   "description": "Receive users and chat logs from Kong Chat Midas Gold Plus Room 1",
   "main": "nodemon server.js",
   "scripts": {

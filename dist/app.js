@@ -11,9 +11,13 @@ var app = new Vue({
   computed: {
     lastX: function() {
       if (this.filterText && this.filterText.length > 0) {
-        let filtered = this.messages.filter(function(f) {
-          let fText = this.filterText.toLowerCase();
-          return f.userName.toLowerCase().includes(fText) || f.message.toLowerCase().includes(fText);
+        let fText = this.filterText.toLowerCase();
+        let filtered = this.messages.filter(function(curMessage) {
+          if (fText) {
+            return curMessage.userName.toLowerCase().includes(fText) || curMessage.message.toLowerCase().includes(fText);
+          } else {
+            return true;
+          }
         });
 
         let sliceStart = (filtered.length-this.show > 0) ? filtered.length-this.show : 0;
@@ -50,9 +54,9 @@ let init = (() => {
     socket.on('update', function(msg){
       let data = JSON.parse(msg);
 
-      app.messages = app.messages.concat(data.messages);
       app.userNames = data.userNames;
       if (data.messages.length > 0) {
+        app.messages = app.messages.concat(data.messages);
         socket.emit("updateDB", data.messages)
         Vue.nextTick(app.scrollDown);
       }
